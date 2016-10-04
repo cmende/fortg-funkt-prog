@@ -1,4 +1,8 @@
 -- exercise01 Christoph Mende
+{-# OPTIONS_GHC -w #-}
+
+main :: IO ()
+main = return ()
 
 -- 1a
 ggT :: Integer -> Integer -> Integer
