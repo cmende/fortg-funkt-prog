@@ -37,7 +37,7 @@ objToSVG :: Object -> String
 objToSVG (Rect (Point ax ay) (Point bx by) s) =
   "<rect x='" ++ show ax ++ "' y='" ++ show ay ++ "' width='" ++ show (bx - ax)
   ++ "' height='" ++ show (by - ay) ++ "' style='" ++ styleToAttr s ++ "' />"
-objToSVG (Circle (Point x y) r s) = "<circle x='" ++ show x ++ "' y='" ++ show y
+objToSVG (Circle (Point x y) r s) = "<circle cx='" ++ show x ++ "' cy='" ++ show y
   ++ "' r='" ++ show r ++ "' style='" ++ styleToAttr s ++ "' />"
 
 toSVG :: Graphic -> String
@@ -50,7 +50,7 @@ rectangle :: Double -> Double -> Graphic
 rectangle x y = Item (Rect (Point 0 0) (Point x y) defaultStyle) Empty
 
 circle :: Double -> Graphic
-circle r = Item (Circle (Point 0 0) r defaultStyle) Empty
+circle r = Item (Circle (Point r r) r defaultStyle) Empty
 
 colored :: Color -> Graphic -> Graphic
 colored _ Empty                       = Empty
