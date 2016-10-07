@@ -51,3 +51,9 @@ rectangle x y = Item (Rect (Point 0 0) (Point x y) defaultStyle) Empty
 
 circle :: Double -> Graphic
 circle r = Item (Circle (Point 0 0) r defaultStyle) Empty
+
+colored :: Color -> Graphic -> Graphic
+colored _ Empty                       = Empty
+colored c (Item (Rect p1 p2 _) Empty) = Item (Rect p1 p2 (Style c)) Empty
+colored c (Item (Circle p r _) Empty) = Item (Circle p r (Style c)) Empty
+colored c (Item o g) = colored c (Item o Empty) <> colored c g
