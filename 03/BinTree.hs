@@ -2,20 +2,20 @@
 module BinTree where
 
 data BinTree a =
-    Empty
-  | Node a (BinTree a)
+    Leaf a
+  | Node (BinTree a) a (BinTree a)
 
 sumTree :: BinTree Int -> Int
-sumTree Empty       = 0
-sumTree (Node x xs) = x + sumTree xs
+sumTree (Leaf x)         = x
+sumTree (Node xs1 x xs2) = x + sumTree xs1 + sumTree xs2
 
 values :: BinTree a -> [a]
-values Empty       = []
-values (Node x xs) = x : values xs
+values (Leaf x)         = [x]
+values (Node xs1 x xs2) = x : values xs1 ++ values xs2
 
 mapTree :: (a -> b) -> BinTree a -> BinTree b
-mapTree _ Empty       = Empty
-mapTree f (Node x xs) = Node (f x) (mapTree f xs)
+mapTree f (Leaf x)         = Leaf (f x)
+mapTree f (Node xs1 x xs2) = Node (mapTree f xs1) (f x) (mapTree f xs2)
 
 tree1 :: BinTree Int
-tree1 = Node 1 (Node 2 (Node 3 Empty))
+tree1 = Node (Leaf 1) 2 (Node (Leaf 3) 4 (Leaf 5))
