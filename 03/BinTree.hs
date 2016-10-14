@@ -1,12 +1,12 @@
 -- Lab03 ex. 3
-module Ex3 where
+module BinTree where
 
 data BinTree a =
     Empty
   | Node a (BinTree a)
 
 sumTree :: BinTree Int -> Int
-sumTree Empty          = 0
+sumTree Empty       = 0
 sumTree (Node x xs) = x + sumTree xs
 
 values :: BinTree a -> [a]
