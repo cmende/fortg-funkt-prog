@@ -11,6 +11,7 @@ foo _       = 4
 bar :: (Int,Int) -> Int
 bar (x,y) = x + y
 
+-- Record, Summentyp
 data Weekday =
     Monday
   | Tuesday
@@ -38,6 +39,7 @@ abbreviation Monday  = "Mo"
 abbreviation Tuesday = "Tu"
 abbreviation _       = "w00t"
 
+-- Record, Produkttyp
 data Point = Point2 Double Double
            | Point3 Double Double Double
   deriving Show
