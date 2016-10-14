@@ -8,7 +8,7 @@ attrToString :: Attr -> String
 attrToString (a := b) = a ++ "='" ++ b ++ "'"
 
 xmlToString :: XML -> String
-xmlToString (XText x)     = x
+xmlToString (XText x)            = x
 xmlToString (XNode x attrs xmls) =
   "<"++ unwords (x : map attrToString attrs) ++">"
   ++ concatMap xmlToString xmls ++"</"++x++">"
