@@ -1,7 +1,7 @@
 module Lecture03 where
 
 
-import Prelude hiding (length, map)
+import           Prelude hiding (length, map)
 -- import qualified Module as M
 
 

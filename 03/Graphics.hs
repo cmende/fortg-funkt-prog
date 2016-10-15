@@ -1,7 +1,7 @@
 -- Lab03 Christoph Mende
 module Graphics where
 
-import XML
+import           XML
 
 data Point = Point Double Double
            deriving Show
