@@ -24,6 +24,7 @@ data IntList =
 -- squareAll Nil         = Nil
 -- squareAll (Cons x xs) = Cons (x * x) (squareAll xs)
 
+-- higher order function (func as parameter)
 mapList :: (Int-> Int) -> IntList -> IntList
 mapList _ Nil         = Nil
 mapList f (Cons x xs) = Cons (f x) (mapList f xs)
@@ -101,6 +102,7 @@ list5 :: [Int]
 list5 = [3..100] -- enumFromTo
 
 
+ -- Typkonstruktor
 data Tree a =
     Empty
   | Node (Tree a) a (Tree a)
