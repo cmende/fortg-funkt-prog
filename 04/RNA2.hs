@@ -14,4 +14,7 @@ result = Just
 
 parseRNA :: String -> Maybe RNA
 parseRNA []     = Just []
-parseRNA (c:cs) = parseBase c >>- (\ x -> Just [x]) -- parseRNA cs
+parseRNA (c:cs) =
+  case parseRNA cs of
+    Nothing -> Nothing
+    Just bs -> parseBase c >>- (\ x -> result (x:bs))
