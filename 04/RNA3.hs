@@ -21,5 +21,5 @@ result :: a -> Either c a
 result = Right
 
 parseRNA :: String -> Either String RNA
-parseRNA []     = Right []
+parseRNA []     = result []
 parseRNA (c:cs) = parseRNA cs >>- (\ x -> parseBase c >>- (\ y -> result (y:x)))
