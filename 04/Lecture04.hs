@@ -1,7 +1,8 @@
 module Lecture04 where
 
 
-import Prelude hiding (map, Maybe(..), Either(..), (.), sum, product, length, foldr)
+import           Prelude hiding (Either (..), Maybe (..), foldr, length, map,
+                          product, sum, (.))
 
 
 map :: (a -> b) -> [a] -> [b]
@@ -12,7 +13,7 @@ map f (x:xs) = f x : map f xs
 data Maybe a = Nothing | Just a
 
 safeHead :: [a] -> Maybe a
-safeHead [] = Nothing
+safeHead []    = Nothing
 safeHead (x:_) = Just x
 
 

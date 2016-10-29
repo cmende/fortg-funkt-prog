@@ -9,7 +9,7 @@ parseBase 'U' = Just U
 parseBase 'A' = Just A
 parseBase 'C' = Just C
 parseBase 'G' = Just G
-parseBase _ = Nothing
+parseBase _   = Nothing
 
 parseRNA :: String -> Maybe RNA
 parseRNA []     = Just []

@@ -5,8 +5,8 @@ data XML = XText String
 data Attr = String := String
 
 foldXML :: (String -> a) -> (String -> [Attr] -> [a] -> a) -> XML -> a
-foldXML f _ (XText s) = f s
-foldXML _ f (XNode s as []) = f s as []
+foldXML f _ (XText s)         = f s
+foldXML _ f (XNode s as [])   = f s as []
 foldXML f1 f2 (XNode s as xs) = f2 s as (map (foldXML f1 f2) xs)
 
 

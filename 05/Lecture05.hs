@@ -1,6 +1,6 @@
 module Lecture05 where
 
-import Prelude hiding (foldr, foldl, head, (++))
+import           Prelude hiding (foldl, foldr, head, (++))
 
 f1 :: Int -> Int
 f1 x = x
@@ -57,7 +57,7 @@ foldr f e (x:xs) = f x (foldr f e xs)
 
 
 foldl :: (a -> b -> a) -> a -> [b] -> a
-foldl _ e [] = e
+foldl _ e []     = e
 foldl f e (x:xs) = foldl f (f e x) xs
 
 
@@ -70,7 +70,7 @@ head (x:_) = x
 (x:xs) ++ ys = x : (xs ++ ys)
 
 append :: [a] -> [a] -> [a]
-append [] ys = ys
+append [] ys     = ys
 append (x:xs) ys = x : append xs ys
 
 -- head ([1,2] ++ [3,4])

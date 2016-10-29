@@ -1,13 +1,13 @@
 module RNA3 where
 
-import RNA (Base(..), RNA)
+import           RNA (Base (..), RNA)
 
 parseBase :: Char -> Either String Base
 parseBase 'U' = Right U
 parseBase 'A' = Right A
 parseBase 'C' = Right C
 parseBase 'G' = Right G
-parseBase x = Left ("No base: " ++ [x])
+parseBase x   = Left ("No base: " ++ [x])
 
 foldEither :: (a -> b) -> Either b a -> b
 foldEither _ (Left x)  = x

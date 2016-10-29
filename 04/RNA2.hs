@@ -1,6 +1,6 @@
 module RNA2 where
 
-import RNA hiding (parseRNA)
+import           RNA hiding (parseRNA)
 
 foldMaybe :: b -> (a -> b) -> Maybe a -> b
 foldMaybe e _ Nothing  = e

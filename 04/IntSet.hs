@@ -24,6 +24,6 @@ intersect :: IntSet -> IntSet -> IntSet
 intersect n1s n2s x = n1s x && n2s x
 
 listToSet :: [Int] -> IntSet
-listToSet []     = empty
+listToSet [] = empty
 --listToSet (n:ns) = (singleton n) `union` (listToSet ns)
 listToSet ns = foldr (union . singleton) empty ns

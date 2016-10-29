@@ -1,4 +1,4 @@
-import Graphics
+import           Graphics
 
 graphic :: Graphic
 graphic = rectangle 500 1 <> circle 100

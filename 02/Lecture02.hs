@@ -48,16 +48,16 @@ p :: Point
 p = Point2 2.3 4.5
 
 first :: Point -> Double
-first (Point2 x _) = x
+first (Point2 x _)   = x
 first (Point3 x _ _) = x
 
 
 data Date =
   Date {
     weekday :: Weekday,
-    year :: Int,
-    month :: Int,
-    day :: Int
+    year    :: Int,
+    month   :: Int,
+    day     :: Int
   }
   deriving Show
 
@@ -95,7 +95,7 @@ list5 :: IntList
 list5 = Cons 13 (Cons 14 (Cons 15 (Cons 16 Nil)))
 
 intListLength :: IntList -> Int
-intListLength Nil = 0
+intListLength Nil        = 0
 intListLength (Cons _ l) = 1 + intListLength l
 
 everySecond :: IntList -> IntList
