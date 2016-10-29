@@ -21,7 +21,7 @@ pos :: Stream Int
 pos = iterateStream (+1) 1
 
 ruler :: Stream Int
-ruler = mapStream test (iterateStream (+1) 1)
+ruler = mapStream test pos
 
 ruler2 :: Stream Int
 --ruler2 = mapStream test (interleaveStreams odds evens)
