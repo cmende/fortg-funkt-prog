@@ -1,6 +1,6 @@
 module Lab06 where
 
-import           Prelude hiding (concat, all, any, sum, product)
+import           Prelude hiding (all, any, concat, product, sum)
 
 -- 1
 

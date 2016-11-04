@@ -1,7 +1,7 @@
 module Lecture06 where
 -- strict vs non-strict vs lazy
 
-import Prelude hiding (repeat, take)
+import           Prelude hiding (repeat, take)
 
 square :: Int -> Int
 square x = x * x
@@ -28,7 +28,7 @@ repeat x = x : repeat x
 
 
 take :: Int -> [a] -> [a]
-take _ [] = []
+take _ []     = []
 take n (x:xs) = if n<=0 then [] else x : take (n-1) xs
 
 take2 :: Int -> [a] -> [a]
@@ -114,7 +114,7 @@ instance Encode a => Encode (Maybe a) where
   encode = error ""
 
 instance Encode a => Encode [a] where
-  encode []   = []
+  encode []     = []
   encode (x:xs) = encode x ++ encode xs
 
 
