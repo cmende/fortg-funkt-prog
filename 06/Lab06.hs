@@ -1,6 +1,7 @@
 module Lab06 where
 
-import           Prelude hiding (all, any, concat, product, sum)
+import           Control.Arrow
+import           Prelude       hiding (all, any, concat, product, sum)
 
 -- 1
 
@@ -69,7 +70,8 @@ instance (Appendable a, Appendable b) => Appendable (a, b) where
 
 sumProduct :: Num a => [a] -> (a, a)
 sumProduct xs =
-  let (s, p) = foldMapList (\ x -> (Sum x, Product x)) xs
+  -- let (s, p) = foldMapList (\ x -> (Sum x, Product x)) xs
+  let (s, p) = foldMapList (Sum &&& Product) xs
   in (getSum s, getProduct p)
 
 
