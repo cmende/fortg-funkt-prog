@@ -105,7 +105,7 @@ findFirst p = getFirst . foldMapList (First . select)
   where
     select x = if p x then Just x else Nothing
 
-data Last a = Last { getLast :: Maybe a}
+data Last a = Last { getLast :: Maybe a }
 
 instance Appendable (Last a) where
   _ <> Last (Just x) = Last (Just x)
