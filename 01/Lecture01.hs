@@ -29,7 +29,7 @@ b1 = False
 b2 :: Bool
 b2 = True
 
-c :: char
+c :: Char
 c = '\n'
 
 ex5 = mod 4 5
