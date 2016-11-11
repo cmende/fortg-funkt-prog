@@ -1,6 +1,6 @@
 module Menu where
 
-import           ReadInt (readIntRange)
+import           ReadInt
 
 -- Interactive Menu
 menu :: [String] -> IO Int
@@ -15,6 +15,7 @@ menu xs = do
     showLine :: Int -> String -> String
     showLine x y = show x ++ ". " ++ y
 
+-- MenuSelect
 menuSelect :: [(String,IO a)] -> IO a
 menuSelect xs = do
   n <- menu (map fst xs)
@@ -28,7 +29,7 @@ data Action = Chars | Words | Lines
 printAction :: Action -> String -> Int
 printAction Chars = length
 printAction Words = length . words
-printAction Lines = length. lines
+printAction Lines = length . lines
 
 wordCount :: FilePath -> IO ()
 wordCount p = do
