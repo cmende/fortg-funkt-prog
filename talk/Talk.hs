@@ -21,8 +21,14 @@ filter f = foldr (\ x xs -> if f x then x : xs else xs) []
 map :: (a -> b) -> [a] -> [b]
 map f = foldr (\ x xs -> f x : xs) []
 
--- TODO: how do we get here?
-build :: ((a -> [a] -> [a]) -> [b] -> c) -> c
+-- (list consumer) foldr k z xs = replace cons with k, replace nil with z in xs
+-- (list producer) build g = g (:) []
+-- => foldr k z (build g)
+-- = foldr k z (g (:) [])
+-- = g k z (see foldr definition)
+
+-- ((cons) -> nil -> List a)
+build :: ((a -> [a] -> [a]) -> [a] -> [a]) -> [a]
 build g = g (:) []
 
 -- replace : and [] with build
