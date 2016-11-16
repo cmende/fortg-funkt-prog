@@ -29,6 +29,7 @@ map f = foldr (\ x xs -> f x : xs) []
 
 -- ((cons) -> nil -> List a)
 build :: ((a -> [a] -> [a]) -> [a] -> [a]) -> [a]
+-- build :: forall a. (forall b. (a -> b -> b) -> b -> b) -> [a]
 build g = g (:) []
 
 -- replace : and [] with build
