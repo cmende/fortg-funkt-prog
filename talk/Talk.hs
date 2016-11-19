@@ -1,3 +1,5 @@
+{-# LANGUAGE RankNTypes #-}
+
 module Talk where
 
 import           Prelude hiding (filter, map)
@@ -28,8 +30,8 @@ map f = foldr (\ x xs -> f x : xs) []
 -- = g k z (see foldr definition)
 
 -- ((cons) -> nil -> List a)
-build :: ((a -> [a] -> [a]) -> [a] -> [a]) -> [a]
--- build :: forall a. (forall b. (a -> b -> b) -> b -> b) -> [a]
+--build :: ((a -> [a] -> [a]) -> [a] -> [a]) -> [a]
+build :: forall a. (forall b. (a -> b -> b) -> b -> b) -> [a]
 build g = g (:) []
 
 -- replace : and [] with build
@@ -63,3 +65,7 @@ doubleOdds'''' xxs =
 doubleOdds''''' :: [Int] -> [Int]
 doubleOdds''''' =
   foldr (\ x xs -> if odd x then (x * 2) : xs else xs) []
+
+
+f :: (forall a. a -> a) -> Int
+f g = g 1
