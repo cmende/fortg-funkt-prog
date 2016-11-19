@@ -67,5 +67,6 @@ doubleOdds''''' =
   foldr (\ x xs -> if odd x then (x * 2) : xs else xs) []
 
 
-f :: (forall a. a -> a) -> Int
-f g = g 1
+-- forall example
+f1 :: (forall a. a -> a) -> Int
+f1 f = f 1
