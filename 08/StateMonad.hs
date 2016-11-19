@@ -35,3 +35,20 @@ instance Monad (State s) where
 instance Applicative (State s) where
  pure = return
  (<*>) = ap
+
+evalState :: State s a -> s -> a
+evalState (State f) s = fst (f s)
+
+get :: State s s
+get = State (\ s -> (s,s))
+
+put :: s -> State s ()
+-- put x = State (\ _ -> ((),x))
+put x = State (const ((),x))
+
+modify :: (s -> s) -> State s ()
+modify f = State (\ s -> ((),f s))
+
+-- numberTreeS' :: Tree a -> State Int (Tree Int)
+
+-- numberTreeS :: Tree a -> Tree Int
