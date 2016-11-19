@@ -30,8 +30,7 @@ map f = foldr (\ x xs -> f x : xs) []
 -- = g k z (see foldr definition)
 
 -- ((cons) -> nil -> List a)
---build :: ((a -> [a] -> [a]) -> [a] -> [a]) -> [a]
-build :: forall a. (forall b. (a -> b -> b) -> b -> b) -> [a]
+build :: (forall b. (a -> b -> b) -> b -> b) -> [a]
 build g = g (:) []
 
 -- replace : and [] with build
@@ -67,6 +66,16 @@ doubleOdds''''' =
   foldr (\ x xs -> if odd x then (x * 2) : xs else xs) []
 
 
--- forall example
+
+-- forall examples
+-- First parameter needs to be a function of type "forall a. a -> a" (like id)
 f1 :: (forall a. a -> a) -> Int
 f1 f = f 1
+
+
+data List a =
+    Nil
+  | Cons a (List a)
+
+build' :: (forall b. (a -> b -> b) -> b -> b) -> List a
+build' g = g Cons Nil
