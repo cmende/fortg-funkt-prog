@@ -8,7 +8,7 @@ data Tree a = Empty
             deriving Show
 
 numberTree' :: Tree a -> Int -> (Tree Int,Int)
-numberTree' Empty x = (Empty,x)
+numberTree' Empty x        = (Empty,x)
 numberTree' (Node l _ r) x =
   let
     (tl,xl) = numberTree' l (x + 1)
@@ -49,6 +49,12 @@ put x = State (const ((),x))
 modify :: (s -> s) -> State s ()
 modify f = State (\ s -> ((),f s))
 
--- numberTreeS' :: Tree a -> State Int (Tree Int)
+numberTreeS' :: Tree a -> State Int (Tree Int)
+numberTreeS' Empty        = return Empty
+numberTreeS' (Node l _ r) = do
+  tl <- numberTreeS' l
+  tr <- numberTreeS' r
+  return (Node tl 1 tr)
 
--- numberTreeS :: Tree a -> Tree Int
+numberTreeS :: Tree a -> Tree Int
+numberTreeS t = evalState (numberTreeS' t) 1
