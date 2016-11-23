@@ -53,8 +53,10 @@ numberTreeS' :: Tree a -> State Int (Tree Int)
 numberTreeS' Empty        = return Empty
 numberTreeS' (Node l _ r) = do
   tl <- numberTreeS' l
+  n <- get
+  modify (+1)
   tr <- numberTreeS' r
-  return (Node tl 1 tr)
+  return (Node tl n tr)
 
 numberTreeS :: Tree a -> Tree Int
 numberTreeS t = evalState (numberTreeS' t) 1
