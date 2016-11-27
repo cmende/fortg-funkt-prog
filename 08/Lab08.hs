@@ -58,4 +58,8 @@ instance Monad [] where
   (x:xs) >>= k = k x ++ xs >>= k
 
 cross :: [a] -> [b] -> [(a,b)]
-cross xs ys = xs >>= (\ x -> ys >>= (\ y -> [(x,y)]))
+-- cross xs ys = xs >>= (\ x -> ys >>= (\ y -> [(x,y)]))
+cross xs ys = do
+  x <- xs
+  y <- ys
+  return (x,y)
