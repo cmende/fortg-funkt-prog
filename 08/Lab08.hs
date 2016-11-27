@@ -33,7 +33,8 @@ instance Monoid m => Monad ((,) m) where
   return x = (mempty,x)
 
   -- (>>=) :: (m,a) -> (a -> (m,b)) -> (m,b)
-  (_,y) >>= k = k y
+  --(_,y) >>= k = k y
+  x >>= k = k (snd x)
 
 instance Monad ((->) r) where
   -- return :: a -> (r -> a)
