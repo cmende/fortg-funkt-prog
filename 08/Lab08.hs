@@ -34,7 +34,10 @@ instance Monoid m => Monad ((,) m) where
 
   -- (>>=) :: (m,a) -> (a -> (m,b)) -> (m,b)
   --(_,y) >>= k = k y
-  x >>= k = k (snd x)
+  --x >>= k = k (snd x)
+  (x1,y1) >>= k =
+    let (x2,y2) = k y1
+    in (mappend x1 x2,y2)
 
 instance Monad ((->) r) where
   -- return :: a -> (r -> a)
