@@ -83,7 +83,7 @@ build g = g (:) []
 Diese Funktion nimmt eine Funktion von einem Typen 2. Ranges. Das heißt, dass
 die Funktion, die übergeben wird, ebenfalls Polymorph sein muss. Konkret heißt
 das, dass eine Funktion vom Typen |forall b. (a -> b -> b) -> b -> b| übergeben
-werden muss. Das |forall b.| (geschrieben als `forall b.') ist bei
+werden muss. Das |forall b.| (geschrieben als @forall b.@) ist bei
 Haskell--Funktionen impliziert, sodass die Funktion üblicherweise einfach als
 |(a -> b -> b) -> b -> b| angegeben wird.
 
