@@ -4,6 +4,7 @@
 
 %include lhs2TeX.fmt
 %include lhs2TeX.sty
+%include forall.fmt
 
 \begin{document}
 
@@ -74,7 +75,6 @@ zu erkennen müssen wir also auch die Funktionen verallgemeinern, die Listen
 produzieren. Dazu wird eine neue Funktion namens |build| eingeführt:
 
 % ((cons) -> nil -> List a)
-% TODO der Punkt hinter forall b. wird als Funktionskomposition interpretiert
 \begin{code}
 build :: (forall b. (a -> b -> b) -> b -> b) -> [a]
 build g = g (:) []
@@ -83,8 +83,9 @@ build g = g (:) []
 Diese Funktion nimmt eine Funktion von einem Typen 2. Ranges. Das heißt, dass
 die Funktion, die übergeben wird, ebenfalls Polymorph sein muss. Konkret heißt
 das, dass eine Funktion vom Typen |forall b. (a -> b -> b) -> b -> b| übergeben
-werden muss. Das |forall b.| ist dabei bei Haskell-Funktionen impliziert, sodass
-die Funktion üblicherweise einfach als |(a -> b -> b) -> b -> b| angegeben wird.
+werden muss. Das |forall b.| (geschrieben als `forall b.') ist bei
+Haskell--Funktionen impliziert, sodass die Funktion üblicherweise einfach als
+|(a -> b -> b) -> b -> b| angegeben wird.
 
 Für dieses |build| werden der übergebenen Funktion der Listenkonstruktor |(:)|
 (also vom Typ |a -> [a] -> [a]|) sowie die leere Liste |[]| (also vom Typ |[a]|)
