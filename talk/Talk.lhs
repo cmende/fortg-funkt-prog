@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{framed}
 
 %include lhs2TeX.fmt
 %include lhs2TeX.sty
@@ -93,6 +94,7 @@ Für dieses |build| werden der übergebenen Funktion der Listenkonstruktor |(:)|
 die übergeben Funktion |g| sowie das |build| einen Wert vom Typen |[a]|
 zurückgeben.
 
+\begin{framed}
 \subsection*{Exkurs Rank--N--Types}
 
 Mit Typen n. Ranges lassen sich Funktionssignaturen für Funktionen, die
@@ -124,28 +126,47 @@ Typen |forall a. a -> a| hat.
 
 Um diese Funktionalität nutzen zu können, muss das |RankNTypes|-Flag gesetzt
 werden. Dies geschieht mittels |{-# LANGUAGE RankNTypes #-}|.
+\end{framed}
 
-% TODO
-% (list consumer) foldr k z xs = replace cons with k, replace nil with z in xs
-% (list producer) build g = g (:) []
-% => foldr k z (build g)
-% = foldr k z (g (:) [])
-% = g k z (see foldr definition)
+Nun haben wir eine Funktion, die Listen konsumiert und eine, die Listen erzeugt.
+Wenn man sich das Vorgehen von |foldr| einmal ansieht, können wir eine Regel
+ableiten, mit der sich diese beiden Funktionen aufheben.
 
-% replace : and [] with build
+Das Ziel von einem Aufruf |foldr k z xs| ist es, alle Listenkonstruktoren
+in |xs| mit einem Aufruf von |k| zu ersetzen und die leere Liste mit |z|.
+Wenn wir nun unsere Liste |xs| mit |build| erzeugen, bekommen wir den Aufruf
+|foldr k z (build g)|, oder wenn wir |build| inline schreiben
+|foldr k z (g (:) [])|. Dieses abstrakte |foldr| kann man nun evaluieren und
+die oben genannte Transformation durchführen, wir ersetzen also im Aufruf
+von |g| das |(:)| durch |k| und |[]| durch |z|. Das Ergebnis ist |g k z|.
+Bei dieser Transformation konnten sowohl |foldr| als auch |build| entfernt
+werden, es werden |k| und |z| jetzt direkt auf |g| angewendet, wodurch die
+Zwischenliste, die |build| vorher erzeugt hat, entfällt.
+
+Um diese Transformation durchführen zu können, schreiben wir zunächst |filter|
+und |map| mit Hilfe von |build|. Dazu müssen wir nur unsere alte Definition
+kopieren, als Lambda (das |g|) an Build übergeben und die Listenkonstruktoren
+und leeren Listen ersetzen.
+
 \begin{code}
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' f xxs = build
   (\ c n -> foldr (\ x xs -> if f x then c x xs else xs) n xxs)
-\end{code}
 
-\begin{code}
 map' :: (a -> b) -> [a] -> [b]
 map' f xxs = build
   (\ c n -> foldr (\ x xs -> c (f x) xs) n xxs)
 \end{code}
 
-% replace map and filter
+Diese Definitionen können wir jetzt in einer neuen Version von |doubleOdds|
+verwenden. Hierzu schreiben wir auch diese wieder inline, um später die
+Transformation durchführen zu können. Auch hier brauchen wir wieder nur
+unsere Definitionen von |filter'| und |map'| in das neue |doubleOdds''| zu
+kopieren und ersetzen dieses mal den Parameter |f| durch eine konkrete Funktion.
+Im Fall vom |map'|, das wir inlinen wollen, ist das der Lambda--Ausdruck
+|(\ x xs -> c0 (x * 2) xs)|, wobei |c0| den von |build| übergebenen Konstruktor
+darstellt. Und an Filter übergeben wir |(\ x xs -> if odd x then c1 x xs else xs)|.
+
 \begin{code}
 doubleOdds'' :: [Int] -> [Int]
 doubleOdds'' xxs = build
