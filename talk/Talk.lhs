@@ -165,7 +165,7 @@ unsere Definitionen von |filter'| und |map'| in das neue |doubleOdds''| zu
 kopieren und ersetzen dieses mal den Parameter |f| durch eine konkrete Funktion.
 Im Fall vom |map'|, das wir inlinen wollen, ist das der Lambda--Ausdruck
 |(\ x xs -> c0 (x * 2) xs)|, wobei |c0| den von |build| übergebenen Konstruktor
-darstellt. Und an Filter übergeben wir |(\ x xs -> if odd x then c1 x xs else xs)|.
+darstellt. Und an Filter übergeben wir |(\ x xs -> if odd x then c1 x xs else xs)|:
 
 \begin{code}
 doubleOdds'' :: [Int] -> [Int]
@@ -174,7 +174,11 @@ doubleOdds'' xxs = build
     (\ c1 n1 -> foldr (\ x xs -> if odd x then c1 x xs else xs) n1 xxs)))
 \end{code}
 
-% foldr k z (build g) = g k z
+Auf diese Funktion können wir nun die Regel |foldr k z (build g) = g k z|
+anwenden. Dazu wird das Lambda der inneren |build|-Funktion als |g| benutzt
+und die Argumente des |foldr| im äußeren |build| stellen die Parameter |k| und
+|z|.
+
 \begin{code}
 doubleOdds''' :: [Int] -> [Int]
 doubleOdds''' xxs = build
@@ -183,18 +187,19 @@ doubleOdds''' xxs = build
       (\ x xs -> c0 (x * 2) xs) n0)
 \end{code}
 
-% inline build
+An dieser Stelle könnte man aufhören, da das Ziel bereits erreicht ist und
+keine Zwischenliste mehr erzeugt wird. Aus Gründen der Lesbarkeit kann man
+jedoch auch das äußere |build| noch inline schreiben und anschließend den
+Lambda--Ausdruck auflösen.
+
 \begin{code}
 doubleOdds'''' :: [Int] -> [Int]
 doubleOdds'''' xxs =
     (\ c1 n1 -> foldr (\ x xs -> if odd x then c1 x xs else xs) n1 xxs)
       (\ x xs -> (x * 2) : xs) []
-\end{code}
 
-\begin{code}
 doubleOdds''''' :: [Int] -> [Int]
-doubleOdds''''' =
-  foldr (\ x xs -> if odd x then (x * 2) : xs else xs) []
+doubleOdds''''' = foldr (\ x xs -> if odd x then (x * 2) : xs else xs) []
 \end{code}
 
 \end{document}
