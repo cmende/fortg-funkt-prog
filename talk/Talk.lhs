@@ -10,6 +10,14 @@
 
 \begin{document}
 
+%if false
+\begin{code}
+{-# LANGUAGE RankNTypes #-}
+module Talk where
+import Prelude hiding (map,filter)
+\end{code}
+%endif
+
 \title{A Short Cut to Deforestation}
 \author{Christoph Mende}
 \date{02.12.2016}
@@ -107,6 +115,14 @@ f2 :: forall alpha. (alpha -> alpha) -> Int
 
 g :: (forall alpha. alpha -> alpha) -> Int
 \end{code}
+
+%if false
+\begin{code}
+f1 _ = 0
+f2 _ = 0
+g _ = 0
+\end{code}
+%endif
 
 |f1| und |f2| beschreiben hierbei jeweils den gleichen Typen. Der Unterschied
 ist lediglich, dass bei |f2| das implizite |forall alpha.| angibt, während |f1|
