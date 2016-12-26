@@ -125,11 +125,11 @@ g _ = 0
 %endif
 
 |f1| und |f2| beschreiben hierbei jeweils den gleichen Typen. Der Unterschied
-ist lediglich, dass bei |f2| das implizite |forall alpha.| angibt, während |f1|
+ist lediglich, dass |f2| das implizite |forall alpha.| angibt, während |f1|
 es weglässt. Dies ändert nichts am Typen der Funktion.
 
 Die Funktion |g| hingegen hat das |forall alpha.| innerhalb der Klammern des
-ersten Parameters. Hierdurch wird vorgeschrieben, dass die übergeben Funktion
+ersten Parameters. Hierdurch wird vorgeschrieben, dass die übergebene Funktion
 ebenfalls Polymorph hinsichtlich |a| sein muss, während |f1| und |f2| auch
 Funktionen vom Typen |Int -> Int| oder |String -> String| übergeben werden kann.
 
