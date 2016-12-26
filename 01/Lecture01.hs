@@ -1,5 +1,6 @@
-module Lecture01 where
 {-# OPTIONS_GHC -w #-}
+
+module Lecture01 where
 
 main :: IO ()
 main = return ()
